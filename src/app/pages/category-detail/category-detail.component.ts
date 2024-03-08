@@ -4,11 +4,12 @@ import { Product } from '../../models/product.model';
 import { ApiService } from '../../services/api.service';
 import { TitleCasePipe } from '@angular/common';
 import { ProductsComponent } from '../products/products.component';
+import { ProductCardComponent } from '../../components/product-card/product-card.component';
 
 @Component({
   selector: 'app-category-detail',
   standalone: true,
-  imports: [TitleCasePipe, ProductsComponent],
+  imports: [TitleCasePipe, ProductsComponent, ProductCardComponent],
   templateUrl: './category-detail.component.html',
   styleUrl: './category-detail.component.scss'
 })
