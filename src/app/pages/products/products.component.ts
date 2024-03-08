@@ -3,11 +3,12 @@ import { Product } from '../../models/product.model';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
+import { ProductCardComponent } from '../../components/product-card/product-card.component';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, ProductCardComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
@@ -21,7 +22,5 @@ export class ProductsComponent implements OnInit {
       this.productsList = data;
     })
   }
-  detailsProduct(id:number):void{
-    this._router.navigate(['/products', id])
-  }
+  
 }
