@@ -16,14 +16,17 @@
       <span class="visually-hidden">Next</span>
     </button>
 </div>
-<div class="container">
+<div class="container mt-5">
+    <h2>Categories</h2>
     <div class="row mt-5">
         @for (category of categoriesList; track category ) {
             <a class="card text-bg-dark mb-3 col-lg-3 col-md-3 col-sm-6 mx-2 text-center d-flex justify-content-center " style="max-width: 18rem;" routerLink="/categories/{{category}}">
                 <div class="card-header"><h2>{{category | titlecase }}</h2></div>
             </a>        
         } @empty {
-            <h2>Cargando categories...</h2>
+          <div class="spinner-border d-flex justify-content-center" role="status">
+            <span class="visually-hidden">Loading categories...</span>
+          </div>
         }
     </div>
 </div>
