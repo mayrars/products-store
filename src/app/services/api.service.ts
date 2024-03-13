@@ -23,7 +23,8 @@ export class ApiService {
     return this._http.get<any[]>(`${this.baseurl}/products/categories`)
   }
 
-  getProductsByCategory(category: string):Observable<any> {
-    return this._http.get<any>(`${this.baseurl}/products/category/${category}`)
+  getProductsByCategory(category: string,sort?:string):Observable<any> {
+    const params = sort ? `?sort=${sort}` : '';
+    return this._http.get<any>(`${this.baseurl}/products/category/${category}${params}`)
   }
 }

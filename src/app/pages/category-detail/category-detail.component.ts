@@ -16,6 +16,7 @@ import { ProductCardComponent } from '../../components/product-card/product-card
 export class CategoryDetailComponent implements OnInit{
   productsList:Product[] = [];
   title:string = '';
+  selectedValue = ''
   private _apiService = inject(ApiService);
   private _route = inject(ActivatedRoute)
   constructor() { }
@@ -23,6 +24,15 @@ export class CategoryDetailComponent implements OnInit{
     this._route.params.subscribe(params => {
       this.title = params['name'];
       this._apiService.getProductsByCategory(params['name']).subscribe((data:Product[])=>{
+        this.productsList = data;
+      })
+    })
+  }
+  onSelect(action:string){
+    this.selectedValue = action;
+    this._route.params.subscribe(params => {
+      this.title = params['name'];
+      this._apiService.getProductsByCategory(params['name'], this.selectedValue).subscribe((data:Product[])=>{
         this.productsList = data;
       })
     })
