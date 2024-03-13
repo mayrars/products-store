@@ -1,6 +1,6 @@
-<nav class="navbar bg-dark border-bottom border-body navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+<nav class="navbar border-bottom border-body navbar-expand-lg bg-body-tertiary" data-bs-theme="light">
     <div class="container">
-        <a class="navbar-brand" routerLink='/'>Shopcart</a>
+        <a class="navbar-brand" routerLink='/'><img src="./assets/shopcart.png" width="120"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -22,11 +22,9 @@
                 <li class="nav-item">
                 <a class="nav-link" [ngClass]="{active: menuOption=='products'}" routerLink="products" (click)="onOption('products')">Products</a>
                 </li>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
             </ul>
         </div>
+        <a href="/login" class="icons_header" [ngClass]="{active: menuOption=='login'}"><i class="bi bi-person-circle"></i> <span>Account</span></a>
+        <a href="/cart" class="icons_header" [ngClass]="{active: menuOption=='login'}"><i class="bi bi-bag-plus"></i> <span>Cart</span></a>        
     </div>
 </nav>

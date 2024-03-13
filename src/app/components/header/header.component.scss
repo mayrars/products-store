@@ -1,0 +1,15 @@
+.icons_header{
+    font-size: 23px;
+    margin-right:25px;
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    span{
+        font-size: 16px;
+        margin-left:10px;
+    }
+    &:hover{
+        text-decoration: underline;
+    }
+}
