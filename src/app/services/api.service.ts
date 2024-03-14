@@ -27,4 +27,12 @@ export class ApiService {
     const params = sort ? `?sort=${sort}` : '';
     return this._http.get<any>(`${this.baseurl}/products/category/${category}${params}`)
   }
+  login(user:{}){
+    const params = {
+      method:"POST",
+      contentType: 'application/json',
+      body:user
+    }
+    return this._http.post(`${this.baseurl}/auth/login`,params)
+  }
 }
