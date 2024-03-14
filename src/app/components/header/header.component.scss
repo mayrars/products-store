@@ -3,7 +3,7 @@
     margin-right:25px;
     display: flex;
     align-items: center;
-    color: white;
+    color: black;
     text-decoration: none;
     span{
         font-size: 16px;
@@ -11,5 +11,6 @@
     }
     &:hover{
         text-decoration: underline;
+        color: #003D29;
     }
 }
