@@ -2,19 +2,23 @@ import { CommonModule, NgClass } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
+import { TitleCasePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ CommonModule, ReactiveFormsModule,NgClass],
+  imports: [ CommonModule, ReactiveFormsModule,NgClass,TitleCasePipe],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit{
   loginForm!: FormGroup
+  error: string = '';
+  loading: boolean = false;
   private _apiService = inject(ApiService);
 
-  constructor(private formBuilder: FormBuilder){
+  constructor(private formBuilder: FormBuilder, private router: Router){
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -29,13 +33,21 @@ export class LoginComponent implements OnInit{
   login(event: Event){
     event.preventDefault()
     const user = {
-      "username": this.loginForm.get('username')?.value, 
+      "username": this.loginForm.get('username')?.value,
       "password": this.loginForm.get('password')?.value
     }
-    this._apiService.login(user).subscribe(res=>{
-      console.log(res)
-    },error=>{
-      console.error('Error al iniciar sesión:', error);
+    this.loading = true
+    this._apiService.login(user).subscribe({
+      next: res=>{
+        this.loading = false
+        this.router.navigate(['/user'])
+        this.loginForm.reset()
+      },
+      error: err=>{
+        this.loading = false
+        console.log(err)
+        this.error = err.error
+      }
     })
   }
   
