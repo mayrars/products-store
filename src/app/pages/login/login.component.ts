@@ -40,13 +40,19 @@ export class LoginComponent implements OnInit{
     this._apiService.login(user).subscribe({
       next: res=>{
         this.loading = false
-        this.router.navigate(['/user'])
-        this.loginForm.reset()
       },
       error: err=>{
         this.loading = false
-        console.log(err)
-        this.error = err.error
+        if(err.status === 400)
+          this.error = "Something went wrong, please try again."
+        else{
+          localStorage.removeItem('loggedIn')
+          this.error = err.error
+        }
+      },
+      complete: ()=>{
+        this.router.navigateByUrl('/user')
+        this.loginForm.reset()
       }
     })
   }
