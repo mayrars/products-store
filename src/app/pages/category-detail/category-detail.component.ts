@@ -5,11 +5,12 @@ import { ApiService } from '../../services/api.service';
 import { TitleCasePipe } from '@angular/common';
 import { ProductsComponent } from '../products/products.component';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
+import { SkeletonComponent } from '../../components/skeleton/skeleton.component';
 
 @Component({
   selector: 'app-category-detail',
   standalone: true,
-  imports: [TitleCasePipe, ProductsComponent, ProductCardComponent],
+  imports: [TitleCasePipe, ProductsComponent, ProductCardComponent,SkeletonComponent ],
   templateUrl: './category-detail.component.html',
   styleUrl: './category-detail.component.scss'
 })
