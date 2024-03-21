@@ -4,11 +4,12 @@ import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
+import { SkeletonComponent } from '../../components/skeleton/skeleton.component';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CurrencyPipe, ProductCardComponent],
+  imports: [CurrencyPipe, ProductCardComponent,SkeletonComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
