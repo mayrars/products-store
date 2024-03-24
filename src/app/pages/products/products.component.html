@@ -1,10 +1,12 @@
 <div class="container mt-5">
     <h1 class="mb-5">All products</h1>
     <div class="row text-center">
-        @for (product of productsList; track product.id) {
-            <app-product-card [product]="product" class="col-4 col-md-3 col-sm-6 my-3"/>
-        } @empty {
-            <app-skeleton />
+        @if(productsList | async; as productsList){
+            @for (product of productsList; track product.id) {
+                <app-product-card [product]="product" class="col-4 col-md-3 col-sm-6 my-3"/>
+            } @empty {
+                <app-skeleton />
+            }
         }
     </div>
 </div>
