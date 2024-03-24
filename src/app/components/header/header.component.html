@@ -24,7 +24,16 @@
                 </li>
             </ul>
         </div>
-        <a href="/login" class="icons_header" [ngClass]="{active: menuOption=='login'}"><i class="bi bi-person-circle"></i> <span>Account</span></a>
-        <a href="/cart" class="icons_header" [ngClass]="{active: menuOption=='cart'}"><i class="bi bi-bag"></i> <span>Cart</span></a>        
+        @if(loginStatus){
+            <a href="./user" class="icons_header" [ngClass]="{active: menuOption=='account'}">
+                <i class="bi bi-person-circle"></i> <span>Account</span>
+            </a>
+            <button class="btn btn-outline-primary mx-3" type="button" (click)="logOut()"><i class="bi bi-box-arrow-right"></i> Logout</button>
+        }@else {
+            <a href="./login" class="icons_header" [ngClass]="{active: menuOption=='login'}">
+                <i class="bi bi-person-circle"></i> <span>Account</span>
+            </a>
+        }
+        <a href="./cart" class="icons_header" [ngClass]="{active: menuOption=='cart'}"><i class="bi bi-bag"></i> <span>Cart</span></a>        
     </div>
 </nav>
