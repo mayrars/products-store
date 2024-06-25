@@ -13,9 +13,9 @@
             </div>
         </div>
         @for(product of productsList; track product.id){
-            <app-product-card [product]="product" class="col-4 col-md-3 col-sm-6 my-3"/>
+            <app-product-card [product]="product" class="col-4 col-md-3 col-sm-6 my-3 mt-5"/>
         }@empty{
-            <app-skeleton />
+            <app-skeleton class="mt-5"/>
         }
     </div>
 </div>
