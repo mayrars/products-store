@@ -8,24 +8,14 @@ import { ApiService } from '../../services/api.service';
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
 })
-export class UserComponent implements OnInit, OnDestroy{
+export class UserComponent implements OnInit{
   private _apiService = inject(ApiService);
   loginStatus:boolean = false;
-  constructor() { 
-    afterRender(()=>{
-      this._apiService.currentUser.subscribe(data=>{
-        this.loginStatus = data ? true : false;
-      })
+  constructor() {}
+  ngOnInit(): void {
+    this._apiService.currentUser.subscribe(data=>{
+      console.log(data)
+      this.loginStatus = data ? true : false;
     })
   }
-
-  ngOnDestroy(): void {
-    this._apiService.currentUser.unsubscribe()
-    this._apiService.currentUserToken.unsubscribe()
-  }
-
-  ngOnInit(): void {
-    
-  }
-
 }
