@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ApiService } from '../../services/api.service';
 import { TitleCasePipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { Login } from '../../models/login.model';
 
 @Component({
   selector: 'app-login',
@@ -24,15 +25,13 @@ export class LoginComponent implements OnInit{
       password: ['', [Validators.required, Validators.minLength(6)]]
     })
   }
-  ngOnInit(): void {
-      
-  }
+  ngOnInit(): void {}
   hasErrors(controlName: string,errorType: string){
     return this.loginForm.get(controlName)?.hasError(errorType) && this.loginForm.get(controlName)?.touched
   }
   login(event: Event){
     event.preventDefault()
-    const user = {
+    const user: Login = {
       "username": this.loginForm.get('username')?.value,
       "password": this.loginForm.get('password')?.value
     }
@@ -40,6 +39,7 @@ export class LoginComponent implements OnInit{
     this._apiService.login(user).subscribe({
       next: res=>{
         this.loading = false
+        localStorage.setItem('token',res.token)
       },
       error: err=>{
         this.loading = false
