@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { provideClientHydration, withHttpTransferCacheOptions } from '@angular/platform-browser';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ApiService } from './services/api.service';
+import { CookieService } from 'ngx-cookie-service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,6 +16,7 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     provideHttpClient(withFetch()),
-    ApiService
+    ApiService,
+    CookieService
   ]
 };
