@@ -1,12 +1,29 @@
 <div class="container mt-5">
     <h1 class="mb-5">All products</h1>
     <div class="row text-center">
+      @defer {
         @if(productsList | async; as productsList){
             @for (product of productsList; track product.id) {
                 <app-product-card [product]="product" class="col-4 col-md-3 col-sm-6 my-3"/>
             } @empty {
-                <app-skeleton />
+              <div class="col-12 d-flex justify-content-center">
+                <div class="spinner-grow" style="width: 5rem; height: 5rem;" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
             }
         }
+      } @placeholder (minimum 300ms) {
+        <div class="row">
+          <app-skeleton
+            class="col-12"
+            [count]="20"
+            [theme]="[
+              { width: '20px' },
+              { width: '60%' },
+              { width: '70%' }
+            ]"/>
+        </div>
+      }
     </div>
 </div>
