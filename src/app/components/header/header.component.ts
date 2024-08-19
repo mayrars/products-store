@@ -13,7 +13,7 @@ import { ApiService } from '../../services/api.service';
 export class HeaderComponent implements OnInit {
   categoriesList:string[] = []
   menuOption: string=''
-  loginStatus:boolean = false;
+  loginStatus?:boolean;
   private _apiService = inject(ApiService);
   private _router = inject(Router)
 
@@ -23,14 +23,15 @@ export class HeaderComponent implements OnInit {
     this.menuOption = menuOption;
   }
   ngOnInit(): void {
-    this._apiService.currentUser.subscribe({
-      next: (data) => {
-        this.loginStatus = data
-      }
-    })
+    this.loginStatus = this.getUserLogged()
     this._apiService.getAllCategories().subscribe(data=>{
       this.categoriesList = data;
     })
+  }
+  getUserLogged(){
+    if(this._apiService.getToken()!='')
+      return true;
+    return false;
   }
   logOut(){
     localStorage.removeItem('token')

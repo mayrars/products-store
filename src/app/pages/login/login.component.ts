@@ -38,8 +38,9 @@ export class LoginComponent implements OnInit{
     this.loading = true
     this._apiService.login(user).subscribe({
       next: res=>{
+        this._apiService.setToken(res.token)
         this.loading = false
-        localStorage.setItem('token',res.token)
+        //localStorage.setItem('token',res.token)
       },
       error: err=>{
         this.loading = false
@@ -52,7 +53,6 @@ export class LoginComponent implements OnInit{
       },
       complete: ()=>{
         this.router.navigateByUrl('/user')
-        this.loginForm.reset()
       }
     })
   }
