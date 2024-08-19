@@ -4,6 +4,7 @@ import { Observable, tap } from 'rxjs';
 import { Product } from '../models/product.model';
 import { BehaviorSubject } from 'rxjs';
 import { Login } from '../models/login.model';
+import { CookieService } from "ngx-cookie-service";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class ApiService {
   currentUserToken: BehaviorSubject<string> = new BehaviorSubject<string>('');
   isloggedIn: boolean = false
   
-
+  constructor(private cookies: CookieService) { }
   getAllProducts(limit?: number):Observable<Product[]> {
     const params = limit ?  `?limit=${limit}` : '';
     return this._http.get<Product[]>(`${this.baseurl}/products${params}`)
@@ -39,15 +40,25 @@ export class ApiService {
     };
     return this._http.post(`${this.baseurl}/auth/login`,user, httpOptions).pipe(
       tap((userData:any) =>{
+        this.setToken(userData.token)
         this.isloggedIn = true
         this.currentUserToken.next(userData.token)
         this.currentUser.next(true) 
       })
     )
   }
+  setToken(token:string){
+    this.cookies.set('token',token)
+  }
+  getToken() {
+    return this.cookies.get("token");
+  }
+  getUserLogged() {
+    const token = this.getToken();
+    // Aquí iría el endpoint para devolver el usuario para un token
+  }
   logOut(){
-    this.currentUserToken.next('')
-    this.currentUser.next(false)
+    this.cookies.delete("token");
   }
   isAuthenticated():boolean{    
     let token = this.currentUserToken
