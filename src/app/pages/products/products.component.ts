@@ -13,10 +13,17 @@ import { AsyncPipe } from '@angular/common';
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
-export class ProductsComponent {
-  private _apiService = inject(ApiService);
+export class ProductsComponent implements OnInit{
   private _router = inject(Router);
-  productsList = this._apiService.getAllProducts()
-  constructor() { }
-  
+  productsList: Product[] = [];
+  selectedValue = ''
+  constructor(private _apiService: ApiService) { }
+  ngOnInit(): void {(
+    this._apiService.getAllProducts().subscribe((data:Product[])=>{
+      this.productsList = data
+    }))
+  }
+  onSelect(action:string){
+
+  }
 }
