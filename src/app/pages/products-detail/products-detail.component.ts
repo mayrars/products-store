@@ -13,12 +13,14 @@ import { CurrencyPipe, UpperCasePipe } from '@angular/common';
 })
 export class ProductsDetailComponent implements OnInit {
   product?:Product
-  private _apiService = inject(ApiService)
+  loading = true
   private _route = inject(ActivatedRoute)
+  constructor(private _apiService: ApiService) { }
   ngOnInit(): void {
     this._route.params.subscribe(params => {
       this._apiService.getProductById(params['id']).subscribe((data:Product) => {
         this.product = data
+        this.loading= false
       })
     })
   }
