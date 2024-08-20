@@ -1,5 +1,13 @@
  <div class="card product-card" style="width:18rem;">
-    <img src="{{product.image}}" class="card-img-top p-4 image" alt="{{ product.title }}">
+    @if(loader){
+      <div class="text-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    }@else{
+      <img src="{{product.image}}" class="card-img-top p-4 image" alt="{{ product.title }}">
+    }
     <div class="card-body mt-2">
       <h5 class="card-title">{{ product.title }}</h5>
       <h6 class="card-subtitle mt-3 mb-2 text-muted ">{{ product.price | currency }}</h6>
@@ -7,6 +15,6 @@
         <button class="btn btn-outline-secondary mt-3 product-button" (click)="detailsProduct(product.id)">
           Details
         </button>
-      </div> 
+      </div>
     </div>
  </div>

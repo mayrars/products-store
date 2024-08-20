@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
 import { Product } from '../../models/product.model';
 import { CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
@@ -10,14 +10,17 @@ import { Router } from '@angular/router';
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss'
 })
-export class ProductCardComponent implements OnInit{
+export class ProductCardComponent implements OnInit, OnChanges{
   @Input()
   product!: Product;
-
+  loader: boolean = true;
   private _router = inject(Router);
-  
+
   ngOnInit(): void {
-      
+    this.loader= false
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.loader= false
   }
   detailsProduct(id:number):void{
     this._router.navigate(['/products', id])
