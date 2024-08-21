@@ -15,11 +15,12 @@ export class ApiService {
   currentUser: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   currentUserToken: BehaviorSubject<string> = new BehaviorSubject<string>('');
   isloggedIn: boolean = false
-  
+
   constructor(private cookies: CookieService) { }
-  getAllProducts(limit?: number):Observable<Product[]> {
-    const params = limit ?  `?limit=${limit}` : '';
-    return this._http.get<Product[]>(`${this.baseurl}/products${params}`)
+  getAllProducts(limit?: number,sort?:string):Observable<Product[]> {
+    const params = limit && limit!=undefined ?  `?limit=${limit}` : '';
+    const params2 = sort ? params=='' ? `?sort=${sort}` : `&sort=${sort}` : '';
+    return this._http.get<Product[]>(`${this.baseurl}/products${params}${params2}`)
   }
 
   getProductById(id: number):Observable<Product> {
@@ -34,6 +35,9 @@ export class ApiService {
     const params = sort ? `?sort=${sort}` : '';
     return this._http.get<any>(`${this.baseurl}/products/category/${category}${params}`)
   }
+  getCart():Observable<any> {
+    return this._http.get<any>(`${this.baseurl}/carts/user/2`)
+  }
   login(user:Login){
     const httpOptions = {
       headers: new HttpHeaders().set('Content-Type', 'application/json').set('method','POST')
@@ -43,7 +47,7 @@ export class ApiService {
         this.setToken(userData.token)
         this.isloggedIn = true
         this.currentUserToken.next(userData.token)
-        this.currentUser.next(true) 
+        this.currentUser.next(true)
       })
     )
   }
@@ -60,7 +64,7 @@ export class ApiService {
   logOut(){
     this.cookies.delete("token");
   }
-  isAuthenticated():boolean{    
+  isAuthenticated():boolean{
     let token = this.currentUserToken
     console.log(token)
     return token.value!='' ? true : false
