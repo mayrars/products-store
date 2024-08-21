@@ -11,9 +11,8 @@ import { Router } from '@angular/router';
   styleUrl: './product-card.component.scss'
 })
 export class ProductCardComponent implements OnInit, OnChanges{
-  @Input()
-  product!: Product;
-  loader: boolean = true;
+  @Input() product!: Product;
+  @Input() loader!: boolean;
   private _router = inject(Router);
 
   ngOnInit(): void {
