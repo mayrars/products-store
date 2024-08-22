@@ -3,12 +3,12 @@ import { ApiService } from '../../services/api.service';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../models/product.model';
 import { CurrencyPipe, UpperCasePipe } from '@angular/common';
-
+import { PinchZoomModule } from '@meddv/ngx-pinch-zoom';
 @Component({
   selector: 'app-products-detail',
   standalone: true,
-  imports: [CurrencyPipe, UpperCasePipe],
-  templateUrl: './products-detail.component.html',
+  imports: [CurrencyPipe, UpperCasePipe, PinchZoomModule],
+templateUrl: './products-detail.component.html',
   styleUrl: './products-detail.component.scss'
 })
 export class ProductsDetailComponent implements OnInit {
@@ -23,5 +23,8 @@ export class ProductsDetailComponent implements OnInit {
         this.loading= false
       })
     })
+  }
+  addProductToCart(product:Product){
+
   }
 }
