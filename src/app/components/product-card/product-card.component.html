@@ -6,10 +6,12 @@
         </div>
       </div>
     }@else{
-      <img src="{{product.image}}" class="card-img-top p-4 image" alt="{{ product.title }}">
+      <a routerLink="/products/{{product.id}}">
+        <img src="{{product.image}}" class="card-img-top p-4 image" alt="{{ product.title }}">
+      </a>
     }
     <div class="card-body mt-2">
-      <h5 class="card-title">{{ product.title }}</h5>
+      <a routerLink="/products/{{product.id}}" class="text-link"><h5 class="card-title">{{ product.title }}</h5></a>
       <h6 class="card-subtitle mt-3 mb-2 text-muted ">{{ product.price | currency }}</h6>
       <div class="d-flex justify-content-center">
         <button class="btn btn-outline-secondary mt-3 product-button" (click)="detailsProduct(product.id)">
