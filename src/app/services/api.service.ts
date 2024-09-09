@@ -35,8 +35,8 @@ export class ApiService {
     const params = sort ? `?sort=${sort}` : '';
     return this._http.get<any>(`${this.baseurl}/products/category/${category}${params}`)
   }
-  getCart():Observable<any> {
-    return this._http.get<any>(`${this.baseurl}/carts/user/2`)
+  getCart(numberCart:number):Observable<any> {
+    return this._http.get<any>(`${this.baseurl}/carts/user/${numberCart}`)
   }
   login(user:Login){
     const httpOptions = {
@@ -74,5 +74,11 @@ export class ApiService {
   }
   get userLoginOn():Observable<boolean> {
     return this.currentUser.asObservable();
+  }
+  addToCart(id:number,userId:number):Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json').set('method','POST')
+    };
+    return this._http.post(`${this.baseurl}/carts/`,{products:[{productId:id}]},httpOptions)
   }
 }
