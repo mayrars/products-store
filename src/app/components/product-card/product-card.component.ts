@@ -24,4 +24,7 @@ export class ProductCardComponent implements OnInit, OnChanges{
   detailsProduct(id:number):void{
     this._router.navigate(['/products', id])
   }
+  addToCart(id:number){
+
+  }
 }
